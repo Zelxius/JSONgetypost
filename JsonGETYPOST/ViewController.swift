@@ -68,6 +68,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     @IBAction func addPost(_ sender: UIBarButtonItem) {
+        let parametros = ["username": "Jorge", "email": "jorge@mail.com"]
+        guard let datos = URL(string: "https://jsonplaceholder.typicode.com/users") else { return }
+        var url = URLRequest(url: datos)
+        url.httpMethod = "POST"
+        url.addValue("appliation/json", forHTTPHeaderField: "Content/Type")
+        guard let body = try? JSONSerialization.data(withJSONObject: parametros, options: []) else { return }
+        url.httpBody = body
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let response = response{
+                print(response)
+            }
+            
+            if let data = data {
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                }catch let error as NSError{
+                    print("Error en el post", error.localizedDescription)
+                }
+            }
+        }.resume()
+        
     }
     
     
