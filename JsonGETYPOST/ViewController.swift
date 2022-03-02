@@ -11,7 +11,19 @@ struct User: Codable {
     let id: Int
     let name: String
     let email: String
+    let address: Address
 }
+
+struct Address: Codable {
+    let city: String
+    let geo: Geo
+}
+
+struct Geo: Codable {
+    let lat: String
+    let lng: String
+}
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tabla: UITableView!
@@ -50,8 +62,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tabla.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let user = usuarios[indexPath.row]
-        cell.textLabel?.text = user.name
-        cell.detailTextLabel?.text = user.email
+        cell.textLabel?.text = user.address.geo.lat
+        cell.detailTextLabel?.text = user.address.geo.lng
         return cell
     }
 
