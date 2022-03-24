@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  JsonGETYPOST
 //
-//  Created by Colimasoft on 02/03/22.
+//  Created by Zelxius on 02/03/22.
 //
 
 import UIKit
@@ -62,8 +62,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tabla.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let user = usuarios[indexPath.row]
-        cell.textLabel?.text = user.address.geo.lat
-        cell.detailTextLabel?.text = user.address.geo.lng
+//        cell.textLabel?.text = user.address.geo.lat
+//        cell.detailTextLabel?.text = user.address.geo.lng
+        cell.textLabel?.text = user.name
+        cell.detailTextLabel?.text = user.email
         return cell
     }
 
